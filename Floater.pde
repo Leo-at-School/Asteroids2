@@ -5,16 +5,13 @@
 //  - Floater orientation has been changed from degrees to radians
 
 public class Floater{
-  //Increase readablity when accessing x and y elements from a 2d array
-  protected int coordX = 0; //X coordinate index
-  protected int coordY = 1; //Y coordinate index
-  
   protected double[][] vertices;
   protected color floaterColor;
   protected double x, y,           //Center relative to the polygon
-                   speedX, speedY,
-                   orientation;    //Radians
-
+                   orientation,    //Radians
+                   speedX, speedY;
+  
+  
   //Accelerate the floater in the direction it is pointing (orientation)   
   public void accelerate(double acceleration){    
     speedX += acceleration*Math.cos(orientation);
@@ -26,24 +23,24 @@ public class Floater{
     orientation += rotate;   
   }
   
-  //Update the floaters position
+  //Update the floater's position
   public void move(){
     //Move the floater       
     x += speedX;    
     y += speedY;     
 
     //Wrap around the screen if needed
-    if (x > width){     
+    if (x > canvasWidth){     
       x = 0;    
     } else if (x < 0){     
-      x = width;    
+      x = canvasWidth;    
     }
     
-    if (y > height){    
+    if (y > canvasHeight){    
       y = 0;    
     } else if (y < 0){     
-      y = height;    
-    }   
+      y = canvasHeight;    
+    }
   }
   
   //Draw the floater
@@ -65,5 +62,13 @@ public class Floater{
     //Orient the polygon accordingly and move its position back to the desired location (The reverse of what was previously done)
     rotate((float)-orientation);
     translate((float)-x, (float)-y);
-  }   
+  }
+  
+  public double getX(){
+    return x;
+  }
+  
+  public double getY(){
+    return y;
+  } 
 } 
